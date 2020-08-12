@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lijing233/PerformanceMonitor/issues"
   },
-  "homepage": "https://github.com/lijing233/PerformanceMonitor#readme"
+  "homepage": "https://github.com/lijing233/PerformanceMonitor#readme",
+  "dependencies": {
+    "wpk-reporter": "^0.7.1"
+  }
 }
