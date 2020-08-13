@@ -4,15 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Performance Test</title>
-  <script src="./index.js"></script>
+  <script src="./src/index.js"></script>
 </head>
 <body>
   <div>Performance data</div>
-  <div id="dataShow"></div>
+  <div id="test"> Jump To GP</div>
 </body>
 <script>
-  setTimeout(() => {
-    alert(navigator.connection.effectiveType)
-  }, 3000);
+  var timer = null;
+  function visibilityChange() {
+    var tag = document.hidden || document.webkitHidden;
+    tag && clearTimeout(timer);
+  }
+  document.addEventListener(
+    "visibilitychange",
+    visibilityChange,
+    false
+  )
+  document.addEventListener(
+    "webkitvisibilitychange",
+    visibilityChange,
+    false
+  );
+  window.addEventListener(
+    "pagehide",
+    function() {
+      clearTimeout(timer);
+    },
+    false
+  );
+
+  var testDom = document.querySelector('#test');
+  testDom.onclick = function() {
+    setTimeout(() => {
+      window.location.href = "market://details?id=com.lenovo.anyshare.gps&referrer=utm_source%3DSHAREit%26utm_medium%3DVShare%26utm_campaign%3DVShare";
+      timer = setTimeout(() => {
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.lenovo.anyshare.gps&referrer=utm_source%3DSHAREit%26utm_medium%3DVShare%26utm_campaign%3DVShare';
+      }, 2000);
+    }, 2500);
+  }
 </script>
 </html>
