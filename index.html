@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Performance Test</title>
-  <script src="./src/index.js"></script>
+  <!-- <script src="./src/index.js"></script> -->
+  <style>
+    html body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div {
+      box-sizing: border-box;
+    }
+
+    .table {
+      width: 100%;
+      border: 1px solid grey;
+    }
+
+    .block {
+      margin-bottom: 20px;
+    }
+
+    .title {
+      color: #333;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .content {
+      display: flex;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .content .name {
+      width: 40%;
+      text-align: center;
+      text-align: right;
+      margin-right: 15px;
+    }
+
+    .content .value {
+      word-wrap: break-word;
+      width: 50%;
+    }
+  </style>
 </head>
+
 <body>
   <div>Performance data</div>
   <div id="test"> Jump To GP</div>
+  <div class="table">
+  </div>
 </body>
 <script>
   var timer = null;
+
   function visibilityChange() {
     var tag = document.hidden || document.webkitHidden;
     tag && clearTimeout(timer);
@@ -28,20 +76,23 @@
   );
   window.addEventListener(
     "pagehide",
-    function() {
+    function () {
       clearTimeout(timer);
     },
     false
   );
 
   var testDom = document.querySelector('#test');
-  testDom.onclick = function() {
+  testDom.onclick = function () {
     setTimeout(() => {
-      window.location.href = "market://details?id=com.lenovo.anyshare.gps&referrer=utm_source%3DSHAREit%26utm_medium%3DVShare%26utm_campaign%3DVShare";
+      window.location.href =
+        "market://details?id=com.lenovo.anyshare.gps&referrer=utm_source%3DSHAREit%26utm_medium%3DVShare%26utm_campaign%3DVShare";
       timer = setTimeout(() => {
-        window.location.href = 'https://play.google.com/store/apps/details?id=com.lenovo.anyshare.gps&referrer=utm_source%3DSHAREit%26utm_medium%3DVShare%26utm_campaign%3DVShare';
+        window.location.href =
+          'https://play.google.com/store/apps/details?id=com.lenovo.anyshare.gps&referrer=utm_source%3DSHAREit%26utm_medium%3DVShare%26utm_campaign%3DVShare';
       }, 2000);
     }, 2500);
   }
 </script>
+
 </html>

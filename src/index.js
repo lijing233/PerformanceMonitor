@@ -1,3 +1,35 @@
+function paintDomData(data) {
+  var dom = document.querySelector('.table');
+  Object.keys(data).forEach(item => {
+    var block = document.createElement('div');
+    block.className = 'block';
+    var title = document.createElement('div');
+    title.className = 'title';
+    title.innerText = item;
+    block.appendChild(title);
+    
+    Object.keys(data[item]).forEach(key => {
+      console.log(key);
+      var content = document.createElement('div');
+      content.className = 'content';
+      var left = document.createElement('div');
+      left.className = 'name';
+      left.innerText = key;
+
+      var right = document.createElement('div');
+      right.className = 'value';
+      right.innerText = data[item][key];
+
+      content.appendChild(left)
+      content.appendChild(right)
+
+      block.appendChild(content)
+    })
+
+    dom.appendChild(block)
+  })
+  console.log(dom);
+}
 (function () {
   class PerformanceMonitor {
     constructor(id) {
@@ -89,8 +121,10 @@
           "getDeviceInfo",
           ""
         );
-        if (info && info.responseCode === "0") {
-          deviceInfo = info;
+
+        var parseInfo = JSON.parse(info);
+        if (parseInfo && parseInfo.responseCode === "0") {
+          deviceInfo = parseInfo;
         }
       }
       this.dataSource["DeviceInfo"] = deviceInfo;
@@ -106,8 +140,9 @@
           "getLocationInfo",
           ""
         );
-        if (info && info.responseCode === "0") {
-          locationInfo = info;
+        var parseInfo = JSON.parse(info);
+        if (parseInfo && parseInfo.responseCode === "0") {
+          locationInfo = parseInfo;
         }
       }
       this.dataSource["LocationInfo"] = locationInfo;
@@ -128,13 +163,14 @@
           MOBILE_UNKNOWN: "UNKNOWN",
           UNKNOWN: "UNKNOWN",
         };
-        var status = window.shareitBridge.syncInvoke(
+        var info = window.shareitBridge.syncInvoke(
           "web-p",
           "getNetworkStatus",
           ""
         );
-        if (status && status.responseCode === "0") {
-          networkStatus = status.networkStatus;
+        var parseInfo = JSON.parse(info);
+        if (parseInfo && parseInfo.responseCode === "0") {
+          networkStatus = parseInfo.networkStatus;
         }
       }
 
@@ -152,8 +188,8 @@
         // Andirod > 5
         networkStatus = netMap[navigator.connection.effectiveType] || "UNKNOWN";
       }
-      this.dataSource["NetInfo"] = networkStatus;
-      return networkStatus;
+      this.dataSource["NetInfo"] = { netStatus: networkStatus};
+      return { netStatus: networkStatus};;
     }
 
     // 获取基础信息
@@ -201,7 +237,7 @@
 
     // 数据上传
     uploadData() {
-      
+
     }
 
 
@@ -215,6 +251,8 @@
         PM_ITEM[funName]();
       }
     });
+    // alert(JSON.stringify(PM_ITEM.dataSource))
+    paintDomData(PM_ITEM.dataSource)
     console.log('dataSource:', PM_ITEM.dataSource);
   });
 })();
