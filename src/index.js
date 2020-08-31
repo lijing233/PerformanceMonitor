@@ -9,7 +9,7 @@ function paintDomData(data) {
     block.appendChild(title);
     
     Object.keys(data[item]).forEach(key => {
-      console.log(key);
+      // console.log(key);
       var content = document.createElement('div');
       content.className = 'content';
       var left = document.createElement('div');
@@ -28,7 +28,7 @@ function paintDomData(data) {
 
     dom.appendChild(block)
   })
-  console.log(dom);
+  // console.log(dom);
 }
 (function () {
   class PerformanceMonitor {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --host 0.0.0.0 --open",
     "dev": "webpack"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "crypto-js": "^4.0.0",
     "fingerprintjs2": "^2.1.2",
     "html-webpack-plugin": "^4.3.0",
+    "mobile-detect": "^1.4.4",
     "wpk-reporter": "^0.7.1"
   },
   "devDependencies": {
