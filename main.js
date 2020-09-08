@@ -1,21 +1,35 @@
 import './src/index'
-import Fingerprint2 from 'fingerprintjs2'
+// import Fingerprint2 from 'fingerprintjs2'
 import getFingerprint from './log/utils/fingerprint';
 import DeviceDected from './log/utils/deviceinfo';
 var MobileDetect = require('mobile-detect')
 
-console.log(new Date().getTime());
-Fingerprint2.get(function (components) {
-  console.log('components :>> ', components);
-  var values = components.map(function (component) { return component.value })
-  var murmur = Fingerprint2.x64hash128(values.join(''), 31)
-  console.log(murmur);
-  console.log(murmur.length);
-})
-console.log(new Date().getTime());
+// console.log(new Date().getTime());
+// Fingerprint2.get(function (components) {
+//   console.log('components :>> ', components);
+//   var values = components.map(function (component) { return component.value })
+//   var murmur = Fingerprint2.x64hash128(values.join(''), 31)
+//   console.log(murmur);
+//   console.log(murmur.length);
+// })
+// console.log(new Date().getTime());
 
 console.log('=============================');
-console.log(getFingerprint());
+var fingerData = getFingerprint()
+console.log('fingerData ===>', fingerData);
+var fingerDom = document.querySelector('#finger');
+fingerData.datalist.forEach(item => {
+  var block = document.createElement('div');
+  block.className = 'wapper';
+  var key = document.createElement('div');
+  key.innerText = item.key;
+  var value = document.createElement('div');
+  value.innerText = item.value;
+  block.appendChild(key)
+  block.appendChild(value)
+  fingerDom.appendChild(block)
+
+})
 console.log('=============================');
 // alert(navigator.userAgent)
 

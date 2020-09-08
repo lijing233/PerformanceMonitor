@@ -82,15 +82,18 @@ DeviceDected.prototype.getOsVersion = function () {
       // Android
       var regex1 = /\((.+?)\)/g;
       var info = this.ua.match(regex1)[0];
+      console.log('osinfo-android :>> ', info);
       if (info) {
         info = info.replace(/\s/g, "").split(";");
         for (var i = 0; i < info.length; i++) {
           if (info[i].indexOf("Android") !== -1) {
+            console.log(info[i]);
             var res = info[i].split("Android")[1];
-            var res = Number(res);
-            if (!isNaN(res)) {
-              OsVersion = String(res);
-            }
+            OsVersion = String(res);
+            // var res = Number(res);
+            // if (!isNaN(res)) {
+            //   OsVersion = String(res);
+            // }
           }
         }
       }
@@ -117,13 +120,13 @@ DeviceDected.prototype.getOsVersion = function () {
       console.log("OsVersion :>> ", OsVersion);
     } else if (this.deviceData.osType === "MacOS") {
       //
-      var reg = /Mac OS X [\d._]*/gi;
-      var iosVerInfo = this.ua.match(reg);
-      var iosVersion = (iosVerInfo + "")
+      var macreg = /Mac OS X [\d._]*/gi;
+      var macosVerInfo = this.ua.match(macreg);
+      var macosVersion = (macosVerInfo + "")
         .replace(/[^0-9|_.]/gi, "")
         .replace(/_/gi, ".");
-      console.log("macOS :>> ", iosVersion);
-      OsVersion = iosVersion || "Unknown";
+      console.log("macOS :>> ", macosVersion);
+      OsVersion = macosVersion || "Unknown";
     }
   }
 
@@ -153,11 +156,12 @@ DeviceDected.prototype.getMobileBrand = function () {
       var regex1 = /\((.+?)\)/g;
       var info = this.ua.match(regex1)[0];
       if (info) {
+        console.log('no build ==>', info);
         info = info.replace(/\s/g, "").split(";");
-        myModel = info[info.length - 1].replace(/\)/g, "");
+        myModel = info[info.length - 1].replace(/\)|\(|\s/g, "");;
       }
     }
-  } else if ((osType = "iOS")) {
+  } else if ((osType === "iOS")) {
     // alert(window.screen.width + '/' + window.screen.height);
     let width = window.screen.width,
       height = window.screen.height;
