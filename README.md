@@ -316,3 +316,24 @@ if (window.navigator && window.navigator.sendBeacon) {
 
 ### 3.页面完全加载
 
+
+
+
+
+
+
+
+
+
+
+## 参考
+
+GA: 
+
+https://www.google-analytics.com/analytics.js
+
+神策：
+
+```js
+https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.1/sensorsdata.min.js
+```
